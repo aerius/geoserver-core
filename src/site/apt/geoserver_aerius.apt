@@ -1,0 +1,78 @@
+Creating a WMS layer in Geoserver for AERIUS
+
+  * geoserver producten:
+    * calculator
+    * monitor
+    * opendata
+    * register
+  * "aerius-geoserver-<productnaam>" project via git up to date
+
+  * Builden en lokaal deployen (tomcat)
+
+  	* Dus, builden "aerius-geoserver-<productnaam>" met "maven install" tot een .war bestand
+  	* .war plaatsen in \Apache Software Foundation\Tomcat 7.0\webapps\
+  	* Tomcat herstarten
+  	* Check http://localhost:8080/geoserver-<productnaam>
+
+  * Laag aanmaken in Geoserver
+
+    * Layers -> Add a new resource
+
+    * Kies database en dan "Configure new SQL view..."
+
+    * Vul naam wms view in
+
+    * Vul query in
+      * Is een SELECT * van die wms view
+      * met de relevante WHERE clauses als: field = %parameternaam%
+
+      bijv.:  SELECT * FROM wms_...._view WHERE calculation_id = %calculation_id% AND ....etc
+
+    * Bij SQL view parameters: "Guess parameters from SQL" en vul bij elke parameter een Default waarde in.
+      * De regex voor getallen is ^[\d]+$
+      * Voor strings ^[\w\d\s]+$
+        en zet quotes in de query
+      * Voor enums ^\'?[\w\d\s]+\'?$
+        en zet géén quotes in de query
+        Default NULL.
+
+    * Tik 'Guess geometry type and srid' aan en klik op refresh ernaast. Vul bij SRID 28992 in indien er -1 komt te staan.
+
+    * Save de SQL view.
+
+    * Komt nu direct in laag gedeelte -> vul in bij Declared SRS(als dat er niet staat): EPSG:28992
+
+    * Vul in bij Lat/Lon Bounding Box: minX=3 minY=47 maxX=7,4 maxY=53,7
+
+    * Save wederom.
+
+    * Start Tomcat opnieuw op
+
+  * 1e keer laag testen:
+    http://localhost:8080/geoserver-<productnaam>/aerius/wms?service=WMS&TRANSPARENT=TRUE&version=1.1.0&request=GetMap&layers=aerius:[LAYERNAAM]&styles=&bbox=150673.66,447755.28,211422.46,481946.64&WIDTH=1130&HEIGHT=636&srs=EPSG:28992&format=image%2Fpng&viewparams=[VIEWPARAMS]
+    [VIEWPARAMS] = [VIEWPARAM1]%3A[VIEWPARAM1VALUE]%3B[VIEWPARAM2]%3A[VIEWPARAM2VALUE] (etc...)
+    (bounding box hier is rond de veluwe)
+
+  * SLD properties in database:
+
+    * Voer de juiste waarden in bij AERIUS\aerius-database\src\data\sql\common\system\sld.sql
+
+    * LET OP DE ID's!!
+
+    * Voer SQL script uit op lokale DB (gooi eerst de juiste tabellen leeg)
+
+  * Test met SLD:
+    http://localhost:8080/geoserver/aerius/wms?service=WMS&TRANSPARENT=TRUE&version=1.1.0&request=GetMap&layers=aerius:[LAYERNAAM]&styles=&bbox=150673.66,447755.28,211422.46,481946.64&WIDTH=1130&HEIGHT=636&srs=EPSG:28992&format=image%2Fpng&viewparams=[VIEWPARAMS]&SLD=http%3A%2F%2Flocalhost%3A8080%2F[APPNAAM]%2Faerius%2Fsld%3Flayer%3Daerius%3A[LAYERNAAM]
+    [APPNAAM] = calculator, of register, of monitor.
+
+  * Geoserver in git updaten:
+
+    * Ga naar tomcat directory -> webapps -> geoserver-<productnaam> dir
+
+    * Kopieer 'data' directory naar [git dir]\AERIUS\aerius-geoserver-<productnaam>\src\main\webapp\ (overschrijf bestaande spullen)
+
+    * Controleer de wijzigingen die gedaan zijn of ze overeenkomen met verwachtingen
+
+  * Voor extra controle: bouw geoserver opnieuw en test nogmaals met SLD.
+
+  * commit in GIT.
