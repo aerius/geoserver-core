@@ -22,7 +22,7 @@
   <artifactId>geoserver-core</artifactId>
   <name>GeoServer :: Core</name>
   <description>AERIUS Geoserver core package to be used by all GeoServer projects.</description>
-  <version>2.17.5-2-SNAPSHOT</version>
+  <version>2.21.1-1-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <organization>
@@ -49,7 +49,8 @@
   </distributionManagement>
 
   <properties>
-    <geoserver.version>2.17.5</geoserver.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <geoserver.version>2.21.1</geoserver.version>
     <aerius-tools.version>1.2.0-SNAPSHOT</aerius-tools.version>
   </properties>
 
