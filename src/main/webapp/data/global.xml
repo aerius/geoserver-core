@@ -15,6 +15,7 @@
     <localWorkspaceIncludesPrefix>false</localWorkspaceIncludesPrefix>
     <showCreatedTimeColumnsInAdminList>false</showCreatedTimeColumnsInAdminList>
     <showModifiedTimeColumnsInAdminList>false</showModifiedTimeColumnsInAdminList>
+    <useHeadersProxyURL>true</useHeadersProxyURL>
   </settings>
   <jai>
     <allowInterpolation>false</allowInterpolation>
