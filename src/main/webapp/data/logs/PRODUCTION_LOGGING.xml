@@ -41,7 +41,7 @@
             <AppenderRef ref="geoserverlogfile"/>
         </Logger>
 
-        <Logger name="org.geowebcache" level="error" additivity="false">
+        <Logger name="org.geowebcache" level="CONFIG" additivity="false">
             <AppenderRef ref="stdout"/>
             <AppenderRef ref="geoserverlogfile"/>
         </Logger>
