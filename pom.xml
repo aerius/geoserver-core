@@ -25,11 +25,6 @@
   <version>2.26.2-2-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <organization>
-    <name>Ministry of Economic Affairs of The Netherlands</name>
-    <url>https://www.government.nl/ministries/ez</url>
-  </organization>
-
   <licenses>
     <license>
       <name>GNU Affero General Public License</name>
@@ -41,6 +36,10 @@
     <contributor>
       <organization>Ministry of Agriculture, Fisheries, Food Security and Nature</organization>
       <organizationUrl>https://www.government.nl/ministries/ministry-of-agriculture-fisheries-food-security-and-nature</organizationUrl>
+    </contributor>
+    <contributor>
+      <organization>Government of the United Kingdom</organization>
+      <organizationUrl>https://www.gov.uk</organizationUrl>
     </contributor>
   </contributors>
 
