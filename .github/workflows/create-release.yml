@@ -26,4 +26,3 @@ jobs:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
           RELEASE_VERSION: ${{ github.event.inputs.RELEASE_VERSION }}
           NEXT_DEV_VERSION: ${{ github.event.inputs.NEXT_DEV_VERSION }}
-          JDK_VERSION: 11
