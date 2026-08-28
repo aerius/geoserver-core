@@ -14,6 +14,3 @@ jobs:
         uses: aerius/github-actions/init@v1.1
 
       - uses: ./aerius-github-actions/events/pull_request-event-action
-        with:
-          JDK_VERSION: 11
-
